@@ -14,6 +14,8 @@ public class PlatformControl : MonoBehaviour {
     public Transform from;
     public float speed = 0.1F;
     public float jumpvelocity;
+    public Animator anim;
+    private bool working = false;
    // public LayerMask groundMask = 1 << 8;
 
     private bool grounded = false;
@@ -35,6 +37,7 @@ public class PlatformControl : MonoBehaviour {
 
        // anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
     }
 
@@ -67,7 +70,7 @@ public class PlatformControl : MonoBehaviour {
         Debug.Log(grounded);
         Debug.Log(transform.position);
         Debug.Log(groundCheck.position);
-       
+        Debug.Log(working);
 
     }
     void FixedUpdate()
@@ -87,6 +90,17 @@ public class PlatformControl : MonoBehaviour {
             else if (h < 0 && facingRight)
                 Flip();
 
+
+            if(rb2d.velocity.x > 0 || rb2d.velocity.x < 0)
+        {
+            anim.Play("Bob2 0");
+            working = true;
+        } 
+            else
+        {
+            anim.Play("Idle 0");
+            working = false;
+        }
             if(jump)
             {
                // anim.SetTrigger("Jump");
