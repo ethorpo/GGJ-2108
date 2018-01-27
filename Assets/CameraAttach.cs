@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraAttach : MonoBehaviour {
 
-	public GameObject player;
+	public GameObject Hero;
 
 	private Vector3 offset;
 
@@ -12,14 +12,14 @@ public class CameraAttach : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		offset = transform.position - player.transform.position;
+		offset = transform.position - Hero.transform.position;
 
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
 
-		transform.position = player.transform.position + offset;
+		transform.position = Hero.transform.position + offset;
 		
 	}
 }

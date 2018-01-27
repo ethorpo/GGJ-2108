@@ -6,14 +6,27 @@ public class PlatformControl : MonoBehaviour {
 
     [HideInInspector] public bool facingRight = true;
     [HideInInspector] public bool jump = false;
-    public float moveForce = 365f;
+    private Rigidbody2D playerRB;
+    public float moveForce = 250f;
     public float maxSpeed = 5f;
-    public float jumpForce = 1000f;
+    public float jumpForce = 50f;
     public Transform groundCheck;
+    public Transform from;
+    public float speed = 0.1F;
+    public float jumpvelocity;
+   // public LayerMask groundMask = 1 << 8;
 
     private bool grounded = false;
    // private Animator anim;
     private Rigidbody2D rb2d;
+    
+    
+
+  
+
+    
+    
+    
 
 
 
@@ -27,19 +40,34 @@ public class PlatformControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        playerRB = GetComponent<Rigidbody2D>();
 	}
 
     // Update is called once per frame
     void Update()
     {
+     
 
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Platforms"));
+        jumpvelocity = playerRB.velocity.y;
+
+        if (jumpvelocity == 0)
+        {
+            grounded = true;
+        }
+        
+        
+            
+        
 
         if (Input.GetButtonDown("Jump") && grounded)
         {
             jump = true;
         }
+
+        Debug.Log(grounded);
+        Debug.Log(transform.position);
+        Debug.Log(groundCheck.position);
+       
 
     }
     void FixedUpdate()
@@ -62,8 +90,9 @@ public class PlatformControl : MonoBehaviour {
             if(jump)
             {
                // anim.SetTrigger("Jump");
-                rb2d.AddForce(new Vector2(0f, jumpForce));
+                rb2d.AddForce(new Vector2(0f, 400f));
                 jump = false;
+                grounded = false;
             }
 
         }
@@ -76,5 +105,7 @@ public class PlatformControl : MonoBehaviour {
         transform.localScale = theScale;
     }
 		
+   
+    
 	
 }
