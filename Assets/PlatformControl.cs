@@ -79,19 +79,19 @@ public class PlatformControl : MonoBehaviour {
 
             //anim.SetFloat("Speed", Mathf.Abs(h));
 
-            if (h * rb2d.velocity.x < maxSpeed)
+          /*  if (h * rb2d.velocity.x < maxSpeed)
                 rb2d.AddForce(Vector2.right * h * moveForce);
-
+*/
             if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
                 rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 
-            if (h > 0 && !facingRight)
+            /*if (h > 0 && !facingRight)
                 Flip();
             else if (h < 0 && facingRight)
                 Flip();
+                */
 
-
-            if(rb2d.velocity.x > 0 || rb2d.velocity.x < 0)
+          /*  if(rb2d.velocity.x > 0 || rb2d.velocity.x < 0)
         {
             anim.Play("Bob2 0");
             working = true;
@@ -101,6 +101,7 @@ public class PlatformControl : MonoBehaviour {
             anim.Play("Idle 0");
             working = false;
         }
+        */
             if(jump)
             {
                // anim.SetTrigger("Jump");
